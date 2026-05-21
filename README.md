@@ -1,2 +1,9 @@
-# my-profile-
-プロフィールをつくろう！
+# my-profile
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewpoint" content="width=device-width, initial-scale=1.0">
+<title>text-xl font-bold text-white</title>
+</head>
+<body>
