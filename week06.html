@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>week6課題</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center p-4">
+    <div class="bg-red-500 w-full max-w-md">
+        <h1 class="font-bold text-2xl mb-5">MBI計算ツール!</h1>
+
+        <div class="mb-4">
+            <label class="block test-sm text-blue-500 mb-2">身長</label>
+            <input id="height" type="number" placeholder="例：150"
+            class="w-full border border-black rounded px-2 py-1">
+        </div>
+
+        <div class="mb-4">
+            <label class="block test-sm text-blue-500 mb-2">体重</label>
+            <input id="weight" type="number" placeholder="例：50"
+            class="w-full border border-black rounded px-2 py-1">
+        </div>
+
+        <button id="calcBtn" class="w-full hover:bg-blue-467 mb-5 transition">計算する</button>
+    
+        <p id="result" class="text-center text-blue-20"></p>
+    </div>
+
+    <script>
+    function calcBmi(height,weight) { 
+        const heightM = height / 100; 
+        return weight/(heightM*heightM);}
+
+    function getJudgment(bmi) {if(bmi<18.5){return "やせ型";}
+    else if (bmi<25){return "普通";} else{return "肥満";}}
+
+    const button = document.querySelector("#calcBtn");
+    const result = document.querySelector("#result");
+
+    button.addEventListener("click",() => {const height =Number(document.querySelector("#height").value);
+    const weight = Number(document.querySelector("#weight").value);
+    
+    if (height <= 0|| weight <= 0) {result.textContent="身長と体重を入力してください";return;}
+        const bmi = calcBmi(height,weight);
+        const judgment =getJudgment(bmi);
+
+        result.textContent ="BMI:"+bmi.toFixed(1)+" ("+judgment+")";
+    });
+    </script>
+
+</body>
+</html>
