@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>チームメンバー一覧</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="bg-gray-100 min-h-screen">
+    <main class="max-w-5xl mx-auto px-4 py-8">
+      <h1 class="text-3xl font-bold text-center mb-2">
+        チームメンバー一覧
+      </h1>
+
+      <p class="text-gray-600 text-center mb-8">
+        私たちのチームメンバーを紹介します
+      </p>
+
+      <!-- 絞り込みボタン -->
+      <div class="flex flex-wrap justify-center gap-3 mb-8">
+        <button
+          class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700"
+          data-role="全員"
+        >
+          全員
+        </button>
+
+        <button
+          class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500"
+          data-role="エンジニア"
+        >
+          エンジニア
+        </button>
+
+        <button
+          class="bg-pink-600 text-white px-4 py-2 rounded hover:bg-pink-500"
+          data-role="デザイナー"
+        >
+          デザイナー
+        </button>
+
+        <button
+          class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-500"
+          data-role="PdM"
+        >
+          PdM
+        </button>
+      </div>
+
+      <!-- メンバーカードを表示する場所 -->
+      <div
+        id="memberList"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+      ></div>
+    </main>
+
+    <script>
+      const members = [
+        {
+          name: "山田悠斗",
+          role: "エンジニア",
+          comment: "使いやすいサービスを作ることを大切にしています。",
+        },
+        {
+          name: "佐藤美咲",
+          role: "デザイナー",
+          comment: "見やすく分かりやすいデザインを心がけています。",
+        },
+        {
+          name: "鈴木蓮",
+          role: "PdM",
+          comment: "チーム全体を見ながらプロジェクトを進めます。",
+        },
+        {
+          name: "高橋葵",
+          role: "エンジニア",
+          comment: "JavaScriptを使った開発を勉強しています。",
+        },
+        {
+          name: "伊藤結衣",
+          role: "デザイナー",
+          comment: "ユーザー目線を意識したUIを考えるのが好きです。",
+        },
+      ];
+
+      const memberList = document.getElementById("memberList");
+      const buttons = document.querySelectorAll("button");
+
+      // メンバーを画面に表示する関数
+      function renderMembers(displayMembers) {
+        memberList.innerHTML = "";
+
+        displayMembers.forEach((member) => {
+          const card = document.createElement("div");
+
+          card.className =
+            "bg-white rounded-lg shadow p-6 hover:shadow-lg transition";
+
+          card.innerHTML = `
+            <h2 class="text-xl font-bold mb-2">
+              ${member.name}
+            </h2>
+
+            <p class="text-blue-600 font-semibold mb-3">
+              ${member.role}
+            </p>
+
+            <p class="text-gray-600">
+              ${member.comment}
+            </p>
+          `;
+
+          memberList.appendChild(card);
+        });
+      }
+
+      // 最初は全員を表示
+      renderMembers(members);
+
+      // ボタンをクリックしたときの処理
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const selectedRole = button.dataset.role;
+
+          if (selectedRole === "全員") {
+            renderMembers(members);
+            console.log(members);
+          } else {
+            const filteredMembers = members.filter((member) => {
+              return member.role === selectedRole;
+            });
+
+            console.log(filteredMembers);
+            renderMembers(filteredMembers);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
